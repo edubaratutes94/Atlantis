@@ -1,0 +1,8 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Hola{% endblocktrans %} {{ user.username }},
+
+{% blocktrans %}Por favor, click abajo para activar la cuenta:{% endblocktrans %}
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block titulo %}
+    <h1>
+        Restaurar base de datos
+        <small>seguridad</small>
+    </h1>
+{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'administration' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#"> Seguridad</a></li>
+    </ol>
+{% endblock %}
+{% block bd_save_menu %}active{% endblock %}
+{% block bd_restore_list %}class = "active"{% endblock %}
+
+
+{% block contenido %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Restaurar base de datos de BookingQBA</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="box-body">
+                        <form class="form-horizontal" method="post" id="form" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-body">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Pegue la dirección del archivo .sql</label>
+                                            <div class="col-md-7">
+                                            <input name="address" type="text" placeholder="Ejemplo: D:/MiAplicacion/bookingQBA.sql"/>
+                                                <small class="text-red">{{ campo.errors }}</small>
+                                            </div>
+                                        </div>
+                                </div>
+                                {% block botones %}
+                                    <div class="form-actions fluid">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button id="submit" type="submit" class="btn btn-primary">Guardar</button>
+
+                                        </div>
+                                    </div>
+                                {% endblock %}
+
+                            </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+{% endblock %}

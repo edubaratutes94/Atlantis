@@ -1,0 +1,154 @@
+{% load static %}
+{% load notifications_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Proyecto | Registrarse</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'assets/dist/img/AdminLTELogo.png' %}" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+     <link rel="stylesheet" href="{% static 'assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/toastr/toastr.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{% static 'assets/dist/css/ionicons.min.css' %}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="{% static 'assets/dist/css/font.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/dist/css/mystyles.css' %}" rel="stylesheet">
+
+</head>
+<body class="hold-transition register-page" style="background-image: url({% static 'assets/dist/img/AdminLTELogo.png' %})">
+<div class="register-box">
+    <div class="card">
+        <div class="card-body register-card-body">
+            <div class="register-logo">
+                <b>Proyecto</b>V.1
+            </div>
+            {% block content %}
+                <p class="login-box-msg">Sé un nuevo miembro, regístrate!</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        {{ form.username }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <small style="color: red">{{ form.username.errors }}</small>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.first_name }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <small style="color: red">{{ form.first_name.errors }}</small>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.last_name }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                        <small style="color: red">{{ form.last_name.errors }}</small>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.email }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-box"></span>
+                            </div>
+                        </div>
+                        <small style="color: red">{{ form.email.errors }}</small>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.password1 }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        {{ form.password2 }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <small style="color: red">{{ form.password2.errors }}</small>
+                    </div>
+                    <div class="form-group col-md-8">
+                        {{ form.captcha }}
+                        <small style="color: red">{{ form.captcha.errors }}</small>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                                <label for="agreeTerms" style="font-size: 14px">
+                                    Acepto los <a href="" data-toggle="modal" data-target="#modal-terminos">
+                                    Términos y Condiciones</a>
+                                </label>
+                            </div>
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreePolit" name="polit" value="agree" required>
+                                <label for="agreePolit" style="font-size: 14px">
+                                    Acepto la <a href="" data-toggle="modal" data-target="#modal-politicas">
+                                    Política de Privacidad</a>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary btn-block">Registrarme</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+                <a href="{% url 'ce_login' %}" class="text-center">Ya soy usuario</a>
+            {% endblock %}
+
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+<!-- jQuery -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+<script src="{% static 'assets/plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+<script src="{% static 'assets/plugins/toastr/toastr.min.js' %}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000
+        });
+        {% if messages %}
+            {% for message in messages %}
+                Toast.fire({
+                    type: '{{ message.tags }}',
+                    title: '{{ message }}',
+                });
+            {% endfor %}
+        {% endif %}
+    })
+</script>
+</body>
+</html>

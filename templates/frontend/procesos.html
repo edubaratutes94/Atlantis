@@ -1,0 +1,109 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Café Blanco - Maquinarias {% endblock %}
+{% block headers %}
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-33.jpg' %});" data-stellar-background-ratio="0.5">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Maquinarias</h1>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Inicio</a></span> <span>Maquinarias</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate text-center fadeInUp ftco-animated">
+                    <span class="subheading">Discover</span>
+                    <h2 class="mb-4">Best Coffee Sellers</h2>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            <div class="row">
+                {% for p in object_list %}
+                    <div class="col-md-4 text-center">
+                        <div class="menu-wrap">
+                            <a href="{% url 'detalle_de_proceso' p.pk %}"> <img src="/{{ p.imagen }}" alt="Foto"
+                                                                                height="220px" width="320px"
+                                                                                class="img-responsive"> </a>
+                            <div class="text text-center pt-4">
+                                <h3><a href="{% url 'detalle_de_proceso' p.pk %}">{{ p.nombre }}</a></h3>
+                                <h5>Tipo de café: {{ p.tipo_producto }}</h5>
+                                <p>{{ p.descripcion|truncatechars:"128" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Menú de paginación -->
+            {% if is_paginated %}
+                <div class="row mt-5">
+                    <div class="col text-center">
+                        <div class="block-27">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                    <li>
+                                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="disabled">
+                                        <a href="#" tabindex="-1">&lt;</a>
+                                    </li>
+                                {% endif %}
+                                {% for i in paginator.page_range %}
+                                    <li class="{% if page_obj.number == i %}active{% endif %}">
+                                        <a href="?page={{ i }}">{{ i }}</a>
+                                    </li>
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li>
+                                        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="disabled">
+                                        <a href="#" tabindex="-1">&gt;</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
+
+
+{#                                    {% for p in proceso_list %}#}
+{#                                        <div class="col-md-4 text-center">#}
+{#                                            <div class="menu-wrap">#}
+{#                                                <p><a href="{% url 'detalle_de_proceso' p.pk %}" class="image p-3 px-xl-4 py-xl-3"><img src="/{{ p.imagen }}" alt="Foto" height="220px" width="320px" class="img-responsive"></a> </p>#}
+{##}
+{#                                                <div class="text">#}
+{#                                                    <h3>#}
+{#                                                        <a href="{% url 'detalle_de_proceso' p.pk %}">{{ p.tipo_proceso }}</a>#}
+{#                                                    </h3>#}
+{#                                                    <h5>{{ p.tipo_proceso }}</h5>#}
+{#                                                    <p>{{ p.descripcion|truncatechars:"128" }}</p>#}
+                                                    {#   <p class="price"><span>$2.90</span></p>#}
+{#                                                </div>#}
+
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{##}
+{#{% endblock %}#}

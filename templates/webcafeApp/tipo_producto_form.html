@@ -1,0 +1,63 @@
+{% extends 'backend/tipo_producto.html' %}
+{% load static %}
+
+{% block producto %}
+    <li class="breadcrumb-item"><a href="{% url 'tipo_producto_listar' %}">Tipos de Productos</a></li>
+    <li class="breadcrumb-item active">Formulario</li>
+
+{% endblock %}
+
+{% block content %}
+<section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Formulario</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                    <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-body">
+                            {% for campo in form %}
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ campo.label_tag }}</label>
+                                    <div class="col-md-4">
+                                            {{ campo }}
+                                        <small class="text-red">{{ campo.errors }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    {% block error %}
+                    {% endblock %}{% block correcto %}
+                    {% endblock %}
+                        {% block botones %}
+                         <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                <a href="{% url 'tipo_producto_listar' %}" type="button" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                        {% endblock %}
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}

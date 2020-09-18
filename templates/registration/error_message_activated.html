@@ -1,0 +1,19 @@
+{% extends 'Authentication/login.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <div class="row text-center">
+        <div class="col-sm-6 col-sm-offset-3">
+            <br><br>
+            <h1 style="color:darkred">404</h1>
+            <i class="fa fa-warning fa-5x text-danger"></i>
+            <h3>OOops!!, {% blocktrans %}ha ocurrido un error{% endblocktrans %}</h3>
+            <p style="font-size:20px;color:#5C5C5C;">{% blocktrans %}Parece que no puede acceder a esa url{% endblocktrans %}</p>
+            <a href="{% url 'index_front' %}" class="btn btn-danger">    {% blocktrans %}Inicio{% endblocktrans %}    </a>
+            <br><br>
+        </div>
+    </div>
+{% endblock %}
+
+

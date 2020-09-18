@@ -1,0 +1,107 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Café Blanco - Contactos {% endblock %}
+{% block headers %}
+    <section class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-33.jpg' %});"
+             data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                        <h1 class="mb-3 mt-5 bread">Contactos</h1>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Inicio</a></span>
+                            <span>Contactos</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+<section class="home-slider owl-carousel">
+
+    <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-33.jpg' %})"
+         data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Contáctenos</h1>
+                    <p class="breadcrumbs"><span class="mr-2"><a href="#">Home</a></span> <span>Contactos</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% block content %}
+    <section class="ftco-section contact-section">
+        <div class="container mt-5">
+            <div class="row block-9">
+                <div class="col-md-4 contact-info ftco-animate">
+                    <div class="row">
+                            {% for em in empresa %}
+                        <div class="col-md-12 mb-4">
+                            <h2 class="h4">Información</h2>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <p><span>Dirección:</span>{{ em.direccion }}</p>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <p><span>Teléfono:</span> <a href="#">{{ em.telefono }}</a></p>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <p><span>Email:</span> <a href="#">{{ em.correo }}</a></p>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-6 ftco-animate">
+                    {% if messages %}
+                        <center>
+                            <label class="label-success"
+                                   style="color: white; padding: 15px; box-shadow: 2px 2px 2px rgba(0,0,0,0.5);">
+                                {% for m in messages %}
+                                    {{ m }}
+                                {% endfor %}
+
+                            </label>
+                        </center>
+                    {% endif %}
+                    <form action="" class="contact-form" method = "POST">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.nombre }}
+                                </div>
+                                {{ form.nombre.errors }}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form.correo }}
+                                </div>
+                                {{ form.correo.errors }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.mensaje }}
+                        </div>
+                        {{ form.mensaje.errors }}
+                        <div class="form-group">
+                            <input type="submit" value="Enviar" class="btn btn-primary py-3 px-5">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

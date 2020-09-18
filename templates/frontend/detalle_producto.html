@@ -1,0 +1,34 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Café Blanco - {{ cafe.tipo_producto }}{% endblock %}
+{% block headers %}
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-17.jpg' %});" data-stellar-background-ratio="0.5">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+            <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            	<h1 class="mb-3 mt-5 bread">Tipos de Café</h1>
+	            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Home</a></span> <span>Tipos de Café</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-6 mb-5 ftco-animate">
+                    <a><img src="/{{ cafe.imagen }}" class="img-fluid" alt="Colorlib Template"></a>
+                </div>
+    			<div class="col-lg-6 product-details pl-md-5 ftco-animate text-center">
+    				<h3>{{ cafe.tipo_producto }}</h3>
+    				<p>{{ cafe.descripcion }}</p>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+{% endblock %}>

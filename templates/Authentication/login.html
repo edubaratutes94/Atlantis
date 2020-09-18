@@ -1,0 +1,89 @@
+{% load static %}
+{% load notifications_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Proyecto | Entrar</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'assets/dist/img/AdminLTELogo1.png' %}" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{% static 'assets/dist/css/ionicons.min.css' %}">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="{% static 'assets/dist/css/font.css' %}" rel="stylesheet">
+</head>
+<body class="hold-transition login-page" style="background-image: url({% static 'assets/dist/img/AdminLTELogo.jpg' %})">
+<div class="login-box">
+
+    <!-- /.login-logo -->
+    <div class="card">
+        <div class="card-body login-card-body">
+            <div class="login-logo">
+                <img src="{% static 'assets/dist/img/logo.jpg' %}" alt="Proyecto" width="250px">
+            </div>
+            {% block content %}
+                <p class="login-box-msg">Entre para iniciar su sesión</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                                <small>{{ message }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="input-group mb-3">
+                        <input name="username" type="text" class="form-control" placeholder="Nombre usuario">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input name="password" type="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+{#                <p class="mb-1">#}
+{#                    <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>#}
+{#                </p>#}
+{#                <p class="mb-0">#}
+{#                    <a href="{% url 'register_front' %}" class="text-center">Regístrese en el sitio</a>#}
+{#                </p>#}
+            {% endblock %}
+
+        </div>
+        <!-- /.login-card-body -->
+    </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'assets/dist/js/adminlte.min.js' %}"></script>
+
+</body>
+</html>

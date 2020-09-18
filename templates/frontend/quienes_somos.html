@@ -1,0 +1,45 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Café Blanco - Quiénes Somos {% endblock %}
+{% block headers %}
+    <section class="home-slider owl-carousel">
+        <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-41.jpg' %});"
+             data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                        <h1 class="mb-3 mt-5 bread">Quiénes Somos</h1>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">Inicio</a></span>
+                            <span>Quiénes Somos</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    <section class="ftco-about d-md-flex">
+        {% for foo in empresa %}
+            <div class="one-half img">
+            <img src="/{{ foo.imagen }}" alt="Foto" height="600px" width="800px" class="img-responsive">
+            </div>
+    	    <div class="one-half ftco-animate fadeInUp ftco-animated">
+    		    <div class="overlap">
+	                <div class="heading-section ftco-animate fadeInUp ftco-animated">
+	        	        <span class="subheading">Nuestra</span>
+	                    <h2 class="mb-4">Historia</h2>
+	                </div>
+	                <div>
+	  				<p>{{ foo.descripcion }}</p>
+	  			    </div>
+  			    </div>
+    	    </div>
+        {% endfor %}
+
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'Security/groups.html' %}
+{% load static %}
+
+
+{% block group_wrapper %}
+    <li class="breadcrumb-item"><a href="{% url 'group_list' %}">Grupos</a></li>
+    <li class="breadcrumb-item active">Formulario</li>
+
+{% endblock %}
+
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Formulario rol</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="card-body">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <form class="form-horizontal" method="post">
+                                {% csrf_token %}
+                                <div class="form-body">
+                                    {% for campo in form %}
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">{{ campo.label_tag }}</label>
+                                            <div class="col-md-6">
+                                                {{ campo }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% block error %}
+                                {% endblock %}{% block correcto %}
+                            {% endblock %}
+                                {% block botones %}
+                                    <div class="form-actions fluid ">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                            <a href="{% url 'group_list' %}" type="button"
+                                               class="btn btn-danger">Cancelar</a>
+                                        </div>
+                                    </div>
+                                {% endblock %}
+
+                            </form>
+                            <!-- END FORM-->
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+
+

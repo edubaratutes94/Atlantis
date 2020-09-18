@@ -1,0 +1,19 @@
+{% extends 'Authentication/login.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="row text-center">
+        <div class="col-12">
+            <br><br>
+            <h2 style="color:#3c763d">{% blocktrans %}Felicidades{% endblocktrans %}</h2>
+            <i class="fa fa-check-circle fa-5x text-success"></i>
+            <h3>{% blocktrans %}Estimado, usuario{% endblocktrans %}</h3>
+            <p style="font-size:20px;color:#5C5C5C;">{% blocktrans %}Su registro fue exitoso. Se le ha enviado un mensaje para confirmar su direccion de correo. Gracias{% endblocktrans %}</p>
+            <a href="{% url 'ce_login' %}" class="btn btn-success">    {% blocktrans %}Entrar{% endblocktrans %}    </a>
+            <br><br>
+        </div>
+
+    </div>
+{% endblock %}
+
+

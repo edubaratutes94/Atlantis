@@ -1,0 +1,148 @@
+{% extends 'Security/users.html' %}
+{% load static %}
+
+{% block miestilo %}
+    <link rel="stylesheet" href="{% static 'assets/dist/css/mystyles.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Formulario usuario</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                    <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-body">
+                            {% for campo in form %}
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ campo.label_tag }}</label>
+                                    <div class="col-md-4">
+                                            {{ campo }}
+                                        <small class="text-red">{{ campo.errors }}</small>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    {% block error %}
+                    {% endblock %}{% block correcto %}
+                    {% endblock %}
+                        {% block botones %}
+                         <div class="form-actions fluid">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                <a href="{% url 'user_list' %}" type="button" class="btn btn-danger">Cancelar</a>
+                            </div>
+                        </div>
+                        {% endblock %}
+
+                    </form>
+                    <!-- END FORM-->
+                </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+{% endblock %}
+{% block srcript %}
+    <script>
+    $(document).ready(function () {
+        $("#id_groups").addClass("form-control")
+    })
+    </script>
+<script>
+        $("#id_first_name").blur(function () {
+            if (this.value.length == 0) {
+                $("#id_first_name").addClass("error")
+                $("#id_first_name").attr('placeholder', 'Este campo es requerido');
+
+            }
+            else {
+                if (/^\s+$/.test(this.value)) {
+                    $("#id_first_name").addClass("error")
+                    $("#id_first_name").val("")
+                    $("#id_first_name").attr('placeholder', 'No espacios vacios');
+                }
+                else {
+                    if (!/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/.test(this.value)) {
+                        $("#id_first_name").addClass("error")
+                        $("#id_first_name").val("")
+                        $("#id_first_name").attr('placeholder', 'El nombre empieza con mayúscula y no tiene números');
+                    }
+                    else {
+                        $("#id_first_name").removeClass("error")
+                    }
+                }
+
+            }
+        });
+        $("#id_last_name").blur(function () {
+            if (this.value.length == 0) {
+                $("#id_last_name").addClass("error")
+                $("#id_last_name").attr('placeholder', 'Este campo es requerido');
+
+            }
+            else {
+                if (/^\s+$/.test(this.value)) {
+                    $("#id_last_name").addClass("error")
+                    $("#id_last_name").val("")
+                    $("#id_last_name").attr('placeholder', 'No espacios vacios');
+                }
+                else {
+                    if (!/^([A-ZÁÉÍÓÚ]{1}[a-zñáéíóú]+[\s]*)+$/.test(this.value)) {
+                        $("#id_last_name").addClass("error")
+                        $("#id_last_name").val("")
+                        $("#id_last_name").attr('placeholder', 'Los apellidos empieza con mayúscula y no tiene números');
+                    }
+                    else {
+                        $("#id_last_name").removeClass("error")
+                    }
+                }
+
+            }
+        });
+        $("#id_email").blur(function () {
+            if (this.value.length == 0) {
+                $("#id_email").addClass("error")
+                $("#id_email").attr('placeholder', 'Este campo es requerido');
+
+            }
+            else {
+                if (/^\s+$/.test(this.value)) {
+                    $("#id_email").addClass("error")
+                    $("#id_email").val("")
+                    $("#id_email").attr('placeholder', 'No espacios vacios');
+                }
+                else {
+                    if (!/^[\w]+@{1}[\w]+\.[a-z]{2,3}$/.test(this.value)) {
+                        $("#id_email").addClass("error")
+                        $("#id_email").val("")
+                        $("#id_email").attr('placeholder', 'Debe escribir un correo válido');
+                    }
+                    else {
+                        $("#id_email").removeClass("error")
+                    }
+                }
+
+            }
+        });
+
+    </script>
+{% endblock %}
+
+

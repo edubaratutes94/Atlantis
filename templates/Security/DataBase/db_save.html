@@ -1,0 +1,120 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block titulo %}
+    <h1>
+        Salvar base de datos
+        <small>seguridad</small>
+    </h1>
+{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{% url 'administration' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#"> Seguridad</a></li>
+    </ol>
+{% endblock %}
+{% block bd_save_menu %}active{% endblock %}
+{% block bd_save_list %}class = "active"{% endblock %}
+
+
+{% block contenido %}
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Salva guarda de la base de datos de BookingQBA</h3>
+                    </div>
+                    <!-- /.box-header -->
+
+                    <div class="box-body">
+                        <form class="form-horizontal" method="post" id="form" action="{% url 'db_save' %}">
+                            {% csrf_token %}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 text-center">
+                                        <button id="submit" type="submit" class="btn btn-primary pull-right">Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Número
+                                        </th>
+                                        <th>
+                                            Fecha de la salva
+                                        </th>
+                                        <th>
+                                            Nombre del fichero
+                                        </th>
+                                        <th>
+                                            Accion
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for u in list_db %}
+                                        <tr>
+                                            <td>
+                                                {{ forloop.counter }}
+                                            </td>
+                                            <td>
+                                                {{ u.3 }}/{{ u.2 }}/{{ u.1 }}
+                                            </td>
+                                            <td>
+                                                {{ u.0 }}
+                                            </td>
+
+                                            <td>
+                                <span class="input-group-sm">
+                                <a href="{% url 'db_restore' u.0 %}"
+                                   class="btn btn-sm btn-primary" title="Restaurar base de datos">
+                                    <i class="fa fa-level-up"></i>
+                                    <i class="fa fa-database"></i>
+
+                                </a>
+                                    {% if request.user.is_superuser %}
+                                        <a href="{% static 'db' %}/{{ u.0 }}" class="btn btn-default btn-sm"
+                                        title="Descargar base de datos" download>
+                                        <i class="fa fa-arrow-circle-o-down"></i>
+                                        </a>
+                                    {% endif %}
+                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>
+                                            Número
+                                        </th>
+                                        <th>
+                                            Fecha de la salva
+                                        </th>
+                                        <th>
+                                            Nombre del fichero
+                                        </th>
+                                        <th>
+                                            Accion
+                                        </th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+{% endblock %}
+

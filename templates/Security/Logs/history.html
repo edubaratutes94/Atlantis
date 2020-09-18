@@ -1,0 +1,152 @@
+{% extends 'index.html' %}
+{% block menu_seguridad %}
+menu-open
+{% endblock %}
+{% block menu_seguridad_active %}
+active
+{% endblock %}
+{% block historial %}
+active
+{% endblock %}
+{% block wrapper %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Historial.</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'inicio' %}">Inicio</a></li>
+                        {% block group_wrapper %}
+                            <li class="breadcrumb-item active">Historial</li>
+                        {% endblock %}
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Historial de las acciones realizadas en la aplicación</h3>
+                        <a href="{% url 'history_list' %}" class="btn btn-primary fa-pull-right">
+                            <span class="fa fa-book-open"> Ver todo</span>
+                        </a>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Tipo de contenido
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    IP
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for h in history %}
+                                <tr>
+                                    <td>
+                                        {{ forloop.counter }}
+                                    </td>
+                                    <td>
+                                        {{ h.action_time }}
+                                    </td>
+                                    <td>
+                                        {{ h.content_type }}
+                                    </td>
+                                    <td>
+                                        {% if h.action_flag == 0%}
+                                            Listar
+                                        {% elif h.action_flag == 1 %}
+                                            Agregar
+                                        {% elif h.action_flag == 2 %}
+                                            Modificar
+                                        {% elif h.action_flag == 3 %}
+                                            Eliminar
+                                        {% elif h.action_flag == 4 %}
+                                            Entrar
+                                        {% elif h.action_flag == 5 %}
+                                            Salir
+                                        {% elif h.action_flag == 6 %}
+                                            Activar
+                                        {% elif h.action_flag == 7 %}
+                                            Desactivar
+                                        {% elif h.action_flag == 8 %}
+                                            Reactivar
+                                        {% elif h.action_flag == 9 %}
+                                           ERROR de login(4 intentos)! <strong>{{ h.object_repr }}</strong>
+                                        {% elif h.action_flag == 10 %}
+                                           Usuario <strong>{{ h.object_repr }}</strong> se ha logueado desde su apk
+                                        {% elif h.action_flag == 11 %}
+                                           Actualizar Casa
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ h.user }}
+                                    </td>
+                                    <td>
+                                        {{ h.change_message }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                 <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Tipo de contenido
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    IP
+                                </th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+{% endblock %}

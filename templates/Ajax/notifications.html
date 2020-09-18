@@ -1,0 +1,7 @@
+{% for noti in notification %}
+    <div class="dropdown-divider"></div>
+    <a href="#" class="alert-{{ noti.level }} dropdown-item" name="{{ noti.id }}"
+       onclick="Notify_less_front({{ noti.id }})">
+        <p><i class="fas fa-check mr-2"></i>{{ noti.verb }}</p>
+    </a>
+{% endfor %}

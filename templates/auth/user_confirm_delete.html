@@ -1,0 +1,52 @@
+{% extends 'auth/user_form.html' %}
+{% load static %}
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header alert-danger">
+                        <h3 class="card-title">Advertencia!</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                    <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <div class="alert">
+
+                    <h4>
+                        Esta seguro que desea eliminar la informción del usuario(( <strong>{{ object.username|capfirst }}</strong> )).
+                        La
+                        información no podrá
+                        restaurarse
+                    </h4>
+                    &nbsp;
+                    <form action="" method="post">{% csrf_token %}
+                        <p class="text-center">
+                            <button type="submit" class="btn btn-danger">
+                                Borrar
+                            </button>
+                            <a class="btn btn-primary" href="{% url 'user_list' %}">
+                                Cancelar
+                            </a>
+                        </p>
+                    </form>
+                </div>
+                    <!-- END FORM-->
+                </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+{% endblock %}
+
+

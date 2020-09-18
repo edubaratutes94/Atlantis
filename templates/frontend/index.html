@@ -1,0 +1,76 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %} Café Blanco - Inicio {% endblock %}
+{% block headers %}
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url({% static 'images/header.jpg' %});">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+            <div class="col-md-8 col-sm-12 text-center ftco-animate">
+            	<span class="subheading">Bienvenido</span>
+              <h1 class="mb-4">Café Blanco</h1>
+              <p class="mb-4 mb-md-5">El mejor lugar para disfrutar de un buen café.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-39.jpg' %});">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+            <div class="col-md-8 col-sm-12 text-center ftco-animate">
+            	<span class="subheading">Bienvenido</span>
+              <h1 class="mb-4">Café</h1>
+              <p class="mb-4 mb-md-5"> El producto más consumido a nivel mundial.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-item" style="background-image: url({% static 'images/photo_2020-09-15_11-21-17.jpg' %});">
+      	<div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+            <div class="col-md-8 col-sm-12 text-center ftco-animate">
+            	<span class="subheading">Bienvenido</span>
+              <h1 class="mb-4">Trabajamos pensando en usted</h1>
+              <p class="mb-4 mb-md-5">Tenemos toda la información que usted necesita.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block content %}
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row align-items-center">
+    			<div class="col-md-6 pr-md-5">
+    				<div class="heading-section text-md-center ftco-animate">
+	          	<span class="subheading">Diferentes</span>
+	            <h2 class="mb-4">tipos de café</h2>
+	            <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+	            <p><a href="{% url 'productos' %}" class="btn btn-primary btn-outline-primary px-4 py-3">Ver los tipos de café</a></p>
+	          </div>
+    			</div>
+    			<div class="col-md-6 pr-md-5">
+    				<div class="heading-section text-md-center ftco-animate">
+	          	<span class="subheading">Máquinas</span>
+	            <h2 class="mb-4">de café</h2>
+	            <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+	            <p><a href="{% url 'procesos' %}" class="btn btn-primary btn-outline-primary px-4 py-3">Ver las maquinarias</a></p>
+	          </div>
+    			</div>
+    		</div>
+    	</div>
+    </section>
+{% endblock %}

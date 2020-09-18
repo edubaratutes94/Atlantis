@@ -1,0 +1,132 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block menu_seguridad %}
+    menu-open
+{% endblock %}
+{% block menu_seguridad_active %}
+    active
+{% endblock %}
+{% block usuarios %}
+    active
+{% endblock %}
+{% block wrapper %}
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Salva y restaura de la base de datos.</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{% url 'inicio' %}">Inicio</a></li>
+                        {% block group_wrapper %}
+                            <li class="breadcrumb-item active">SalvaRestaura</li>
+                        {% endblock %}
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Listado de usuarios</h3>
+                    </div>
+                    <!-- /.card-header -->
+
+                    <div class="card-body">
+                        <form class="form-horizontal" method="post" id="form" action="{% url 'db_save' %}">
+                            {% csrf_token %}
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 text-right">
+                                        <button id="submit" type="submit" class="btn btn-primary">Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Número
+                                        </th>
+                                        <th>
+                                            Fecha de la salva
+                                        </th>
+                                        <th>
+                                            Nombre del fichero
+                                        </th>
+                                        <th>
+                                            Accion
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for u in list_db %}
+                                        <tr>
+                                            <td>
+                                                {{ forloop.counter }}
+                                            </td>
+                                            <td>
+                                                {{ u.3 }}/{{ u.2 }}/{{ u.1 }}
+                                            </td>
+                                            <td>
+                                                {{ u.0 }}
+                                            </td>
+
+                                            <td>
+                                <span class="input-group-sm">
+                                <a href="{% url 'db_restore' u.0 %}"
+                                   class="btn btn-sm btn-primary" title="Restaurar base de datos">
+                                    <i class="fa fa-level-up"></i>
+                                    <i class="fa fa-database"></i>
+
+                                </a>
+                                    {% if request.user.is_superuser %}
+                                        <a href="{% static 'db' %}/{{ u.0 }}" class="btn btn-default btn-sm"
+                                        title="Descargar base de datos" download>
+                                        <i class="fa fa-download"></i>
+                                        </a>
+                                    {% endif %}
+                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>
+                                            Número
+                                        </th>
+                                        <th>
+                                            Fecha de la salva
+                                        </th>
+                                        <th>
+                                            Nombre del fichero
+                                        </th>
+                                        <th>
+                                            Accion
+                                        </th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+{% endblock %}
